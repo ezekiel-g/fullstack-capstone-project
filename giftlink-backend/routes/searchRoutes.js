@@ -12,7 +12,7 @@ router.get('/', async (request, response, next) => {
         // Add the name filter to the query if the name parameter is not empty
         if (request.query.name && request.query.name.trim() !== '') {
             // Using regex for partial match, case-insensitive
-            query.name = { $regex: request.query.name, $options: "i" }
+            query.name = { $regex: request.query.name, $options: 'i' }
         }
 
         // Add other filters to the query
