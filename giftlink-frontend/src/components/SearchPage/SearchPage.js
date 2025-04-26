@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import {urlConfig} from '../../config';
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { urlConfig } from '../../config'
 
 function SearchPage() {
-
     //Task 1: Define state variables for the search query, age range, and search results.
-    const categories = ['Living', 'Bedroom', 'Bathroom', 'Kitchen', 'Office'];
-    const conditions = ['New', 'Like New', 'Older'];
+    const categories = ['Living', 'Bedroom', 'Bathroom', 'Kitchen', 'Office']
+    const conditions = ['New', 'Like New', 'Older']
 
     useEffect(() => {
         // fetch all products
@@ -15,32 +14,28 @@ function SearchPage() {
             try {
                 let url = `${urlConfig.backendUrl}/api/gifts`
                 console.log(url)
-                const response = await fetch(url);
+                const response = await fetch(url)
                 if (!response.ok) {
                     //something went wrong
                     throw new Error(`HTTP error; ${response.status}`)
                 }
-                const data = await response.json();
-                setSearchResults(data);
+                const data = await response.json()
+                setSearchResults(data)
             } catch (error) {
-                console.log('Fetch error: ' + error.message);
+                console.log('Fetch error: ' + error.message)
             }
-        };
+        }
 
-        fetchProducts();
-    }, []);
-
+        fetchProducts()
+    }, [])
 
     // Task 2. Fetch search results from the API based on user inputs.
 
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
-    const goToDetailsPage = (productId) => {
+    const goToDetailsPage = productId => {
         // Task 6. Enable navigation to the details page of a selected gift.
-    };
-
-
-
+    }
 
     return (
         <div className="container mt-5">
@@ -59,7 +54,7 @@ function SearchPage() {
                 </div>
             </div>
         </div>
-    );
+    )
 }
 
-export default SearchPage;
+export default SearchPage
