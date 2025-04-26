@@ -1,33 +1,22 @@
+// Get all gifts
 router.get('/', async (request, response) => {
     try {
-        // Task 1: Connect to MongoDB and store connection to db constant
         const db = await connectToDatabase()
-
-        // Task 2: use the collection() method to retrieve the gift collection
         const collection = db.collection('gifts')
-
-        // Task 3: Fetch all gifts using the collection.find method. Chain with toArray method to convert to JSON array
         const gifts = await collection.find({}).toArray()
-
-        // Task 4: return the gifts using the response.json method
         response.status(200).json(gifts)
     } catch (error) {
-        console.error('Error fetching gifts:', error)
+        console.error('Error fetching gifts: ', error)
         response.status(500).send('Error fetching gifts')
     }
 })
 
+// Get a single gift by ID
 router.get('/:id', async (request, response) => {
     try {
-        // Task 1: Connect to MongoDB and store connection to db constant
-        const db = await connectToDatabase()
-
-        // Task 2: use the collection() method to retrieve the gift collection
-        const collection = db.collection('gifts')
-
         const id = request.params.id
-
-        // Task 3: Find a specific gift by ID using the collection.fineOne method and store in constant called gift
+        const db = await connectToDatabase()
+        const collection = db.collection('gifts')
         const gift = await collection.findOne({ id: id })
 
         if (!gift) {
@@ -36,7 +25,7 @@ router.get('/:id', async (request, response) => {
 
         response.status(200).json(gift)
     } catch (error) {
-        console.error('Error fetching gift:', error)
+        console.error('Error fetching gift: ', error)
         response.status(500).send('Error fetching gift')
     }
 })
