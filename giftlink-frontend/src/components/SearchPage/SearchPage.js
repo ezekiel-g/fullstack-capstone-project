@@ -105,7 +105,7 @@ function SearchPage() {
                                 min="1"
                                 max="10"
                                 value={ageRange}
-                                onChange={e => setAgeRange(e.target.value)}
+                                onChange={event => setAgeRange(event.target.value)}
                             />
                         </div>
                     </div>
@@ -115,7 +115,7 @@ function SearchPage() {
                         className="form-control mb-2"
                         placeholder="Search for items..."
                         value={searchQuery}
-                        onChange={e => setSearchQuery(e.target.value)}
+                        onChange={event => setSearchQuery(event.target.value)}
                     />
                     <button className="btn btn-primary" onClick={handleSearch}>
                         Search
