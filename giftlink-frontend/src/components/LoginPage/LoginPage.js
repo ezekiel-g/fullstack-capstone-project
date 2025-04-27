@@ -10,7 +10,7 @@ function LoginPage() {
     const [incorrect, setIncorrect] = useState('')
     const navigate = useNavigate()
     const bearerToken = sessionStorage.getItem('bearer-token')
-    const { setIsLoggedIn } = useAppContext()
+    const { setIsLoggedIn, setUserName } = useAppContext()
 
     useEffect(() => {
         if (sessionStorage.getItem('auth-token')) {
@@ -41,11 +41,12 @@ function LoginPage() {
             sessionStorage.setItem('name', json.userName)
             sessionStorage.setItem('email', json.userEmail)
             setIsLoggedIn(true)
+            setUserName(json.userName)
             navigate('/app')
         } else {
             document.getElementById('email').value = ''
             document.getElementById('password').value = ''
-            setIncorrect('Wrong password. Try again.')
+            setIncorrect('Wrong email address and/or password')
             setTimeout(() => {
                 setIncorrect('')
             }, 2000)

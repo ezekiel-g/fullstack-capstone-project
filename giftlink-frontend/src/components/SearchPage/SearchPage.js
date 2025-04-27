@@ -15,7 +15,6 @@ function SearchPage() {
         const fetchProducts = async () => {
             try {
                 let url = `${urlConfig.backendUrl}/api/gifts`
-                console.log(url)
                 const response = await fetch(url)
                 if (!response.ok) {
                     // Something went wrong
