@@ -21,31 +21,68 @@ function RegisterPage() {
                             Register
                         </h2>
 
-                        <div className="mb-4">
-                            <label htmlFor="firstName" className="form label">
-                                {' '}
-                                FirstName
+                        <div className="mb-3">
+                            <label htmlFor="firstName" className="form-label">
+                                First name
                             </label>
-                            <br />
                             <input
                                 id="firstName"
                                 type="text"
                                 className="form-control"
-                                placeholder="Enter your firstName"
+                                placeholder="Enter your first name"
                                 value={firstName}
-                                onChange={event =>
-                                    setFirstName(event.target.value)
-                                }
+                                onChange={event => setFirstName(event.target.value)}
                             />
                         </div>
 
+                        <div className="mb-3">
+                            <label htmlFor="lastName" className="form-label">
+                                Last name
+                            </label>
+                            <input
+                                id="lastName"
+                                type="text"
+                                className="form-control"
+                                placeholder="Enter your last name"
+                                value={lastName}
+                                onChange={event => setLastName(event.target.value)}
+                            />
+                        </div>
+
+                        <div className="mb-3">
+                            <label htmlFor="email" className="form-label">
+                                Email address
+                            </label>
+                            <input
+                                id="email"
+                                type="text"
+                                className="form-control"
+                                placeholder="Enter your email address"
+                                value={email}
+                                onChange={event => setEmail(event.target.value)}
+                            />
+                        </div>
+
+                        <div className="mb-4">
+                            <label htmlFor="password" className="form-label">
+                                Password
+                            </label>
+                            <input
+                                id="password"
+                                type="password"
+                                className="form-control"
+                                placeholder="Enter your password"
+                                value={password}
+                                onChange={event => setPassword(event.target.value)}
+                            />
+                        </div>
+                        
                         <button
                             className="btn btn-primary w-100 mb-3"
                             onClick={handleRegister}
                         >
                             Register
                         </button>
-
                         <p className="mt-4 text-center">
                             Already a member?{' '}
                             <a href="/app/login" className="text-primary">

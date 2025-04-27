@@ -65,6 +65,7 @@ function SearchPage() {
                 <div className="col-md-6">
                     <div className="filter-section mb-3 p-3 border rounded">
                         <h5>Filters</h5>
+                        
                         <div className="d-flex flex-column">
                             {/* Category Dropdown */}
                             <label htmlFor="categorySelect">Category</label>
