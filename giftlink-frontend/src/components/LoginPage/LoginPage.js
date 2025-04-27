@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 import './LoginPage.css'
 
@@ -7,6 +8,7 @@ function LoginPage() {
     const [password, setPassword] = useState('')
 
     const handleLogin = async event => {
+        console.log('This is handleLogin')
         event.preventDefault()
     }
 
@@ -44,6 +46,7 @@ function LoginPage() {
                                 onChange={event => setPassword(event.target.value)}
                             />
                         </div>
+                        
                         {/* Include appropriate error message if login is incorrect*/}
                         <button
                             className="btn btn-primary w-100 mb-3"
@@ -53,9 +56,9 @@ function LoginPage() {
                         </button>
                         <p className="mt-4 text-center">
                             New here?{' '}
-                            <a href="/app/register" className="text-primary">
-                                Register Here
-                            </a>
+                            <Link to="/app/register" className="text-primary">
+                                Register
+                            </Link>
                         </p>
                     </div>
                 </div>
