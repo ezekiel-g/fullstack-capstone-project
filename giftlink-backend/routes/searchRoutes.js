@@ -1,13 +1,14 @@
-const express = require('express')
-const router = express.Router()
-const connectToDatabase = require('../models/db')
+/*jshint esversion: 8 */
+const express = require('express');
+const router = express.Router();
+const connectToDatabase = require('../models/db');
 
 // Search for gifts
 router.get('/', async (request, response, next) => {
     try {
-        const db = await connectToDatabase()
-        const collection = db.collection('gifts')
-        let query = {}
+        const db = await connectToDatabase();
+        const collection = db.collection('gifts');
+        let query = {};
 
         // Add the name filter to the query if the name parameter is not empty
         if (request.query.name && request.query.name.trim() !== '') {
@@ -27,10 +28,10 @@ router.get('/', async (request, response, next) => {
         }
 
         // Fetch filtered gifts using the find(query) method
-        const gifts = await collection.find(query).toArray()
-        response.status(200).json(gifts)
+        const gifts = await collection.find(query).toArray();
+        response.status(200).json(gifts);
     } catch (error) {
-        next(error)
+        next(error);
     }
 })
 
