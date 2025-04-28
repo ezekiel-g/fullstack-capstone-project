@@ -45,10 +45,10 @@ function Navbar() {
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <a className="navbar-brand" href="/">GiftLink</a>
+            <Link className="navbar-brand" to="/">GiftLink</Link>
 
-            <div className="collapse navbar-collapse" id="navbarNav">
-                <ul className="navbar-nav ms-auto">
+            <div className="ms-auto" id="navbarNav">
+                <ul className="navbar-nav">
                     <li className="nav-item">
                         <a className="nav-link" href="/home.html">Home</a>
                     </li>

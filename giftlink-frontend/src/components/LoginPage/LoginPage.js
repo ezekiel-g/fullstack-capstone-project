@@ -18,9 +18,7 @@ function LoginPage() {
         }
     }, [navigate])
 
-    const handleLogin = async event => {
-        event.preventDefault()
-
+    const handleLogin = async () => {
         const response = await fetch(`${urlConfig.backendUrl}/api/auth/login`, {
             method: 'POST',
             headers: {
@@ -47,9 +45,9 @@ function LoginPage() {
             document.getElementById('email').value = ''
             document.getElementById('password').value = ''
             setIncorrect('Wrong email address and/or password')
-            setTimeout(() => {
-                setIncorrect('')
-            }, 2000)
+            // setTimeout(() => {
+            //     setIncorrect('')
+            // }, 2000)
         }
     }
 
@@ -93,17 +91,7 @@ function LoginPage() {
                                 }}
                             />
 
-                            <span
-                                style={{
-                                    color: 'red',
-                                    height: '.5cm',
-                                    display: 'block',
-                                    fontStyle: 'italic',
-                                    fontSize: '12px'
-                                }}
-                            >
-                                {incorrect}
-                            </span>
+                            <div className="text-danger">{incorrect}</div>
                         </div>
                         <button
                             className="btn btn-primary w-100 mb-3"
