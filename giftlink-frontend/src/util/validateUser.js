@@ -39,7 +39,7 @@ const validateUser = {
         return { valid: true, message: '' }
     },
 
-    validateEmail: password => {
+    validatePassword: password => {
         if (!password) {
             return { valid: false, message: 'Password is required' }
         }

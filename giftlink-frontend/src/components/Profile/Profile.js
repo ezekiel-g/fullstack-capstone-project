@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAppContext } from '../../context/AuthContext'
 import { urlConfig } from '../../config'
+import validateUser from '../../util/validateUser'
 import './Profile.css'
 
 const Profile = () => {
@@ -10,6 +11,7 @@ const Profile = () => {
     const { setUserName } = useAppContext()
     const [changed, setChanged] = useState('')
     const [editMode, setEditMode] = useState(false)
+    const [errors, setErrors] = useState([])
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -49,6 +51,18 @@ const Profile = () => {
     }
     const handleSubmit = async event => {
         event.preventDefault()
+
+        setErrors([])
+
+        const newErrors = []
+
+        const firstNameValidation = validateUser.validateFirstName(updatedDetails.name)
+        if (!firstNameValidation.valid) newErrors.push(firstNameValidation.message)
+
+        if (newErrors.length > 0) {
+            setErrors(newErrors)
+            return
+        }
 
         try {
             const authtoken = sessionStorage.getItem('auth-token')
@@ -91,6 +105,10 @@ const Profile = () => {
         }
     }
 
+    const errorDisplay = errors.map((error, index) => {
+        return <li key={index}>{error}</li>
+    })
+
     return (
         <div className="profile-container">
             {editMode ? (
@@ -105,7 +123,7 @@ const Profile = () => {
                         />
                     </label>
                     <label>
-                        Name
+                        First name
                         <input
                             type="text"
                             name="name"
@@ -124,19 +142,12 @@ const Profile = () => {
                         <b>Email:</b> {userDetails.email}
                     </p>
                     <button onClick={handleEdit}>Edit</button>
-                    <span
-                        style={{
-                            color: 'green',
-                            height: '.5cm',
-                            display: 'block',
-                            fontStyle: 'italic',
-                            fontSize: '12px'
-                        }}
-                    >
+                    <span style={{ color: 'green' }}>
                         {changed}
                     </span>
                 </div>
             )}
+            <ul className="text-danger">{errorDisplay}</ul>
         </div>
     )
 }

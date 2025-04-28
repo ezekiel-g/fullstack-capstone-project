@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { urlConfig } from '../../config'
 import { useAppContext } from '../../context/AuthContext'
+import validateUser from '../../util/validateUser'
 import './RegisterPage.css'
 
 function RegisterPage() {
@@ -9,7 +10,7 @@ function RegisterPage() {
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [showError, setShowError] = useState('')
+    const [showError, setShowError] = useState([])
     const { setIsLoggedIn } = useAppContext()
     const navigate = useNavigate()
 
@@ -20,6 +21,27 @@ function RegisterPage() {
     }, [navigate])
 
     const handleRegister = async () => {
+        setShowError([])
+
+        const newErrors = []
+
+        const firstNameValidation = validateUser.validateFirstName(firstName)
+        if (!firstNameValidation.valid) newErrors.push(firstNameValidation.message)
+
+        const lastNameValidation = validateUser.validateLastName(lastName)
+        if (!lastNameValidation.valid) newErrors.push(lastNameValidation.message)
+
+        const emailValidation = validateUser.validateEmail(email)
+        if (!emailValidation.valid) newErrors.push(emailValidation.message)
+        
+        const passwordValidation = validateUser.validatePassword(password)
+        if (!passwordValidation.valid) newErrors.push(passwordValidation.message)
+
+        if (newErrors.length > 0) {
+            setShowError(newErrors)
+            return
+        }
+
         const response = await fetch(
             `${urlConfig.backendUrl}/api/auth/register`,
             {
@@ -46,9 +68,13 @@ function RegisterPage() {
             navigate('/app')
         }
         if (json.error) {
-            setShowError(json.error)
+            setShowError([json.error])
         }
     }
+
+    const errorDisplay = showError.map((error, index) => {
+        return <li key={index}>{error}</li>
+    })
 
     return (
         <div className="container mt-5">
@@ -99,8 +125,6 @@ function RegisterPage() {
                                 value={email}
                                 onChange={event => setEmail(event.target.value)}
                             />
-
-                            <div className="text-danger">{showError}</div>
                         </div>
 
                         <div className="mb-4">
@@ -116,6 +140,9 @@ function RegisterPage() {
                                 onChange={event => setPassword(event.target.value)}
                             />
                         </div>
+
+                        <ul className="text-danger">{errorDisplay}</ul>
+
                         <button
                             className="btn btn-primary w-100 mb-3"
                             onClick={handleRegister}

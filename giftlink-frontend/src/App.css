@@ -121,6 +121,14 @@ body,
     color: #ffc107; /* Yellow text color for older items */
 }
 
+.navbar-brand {
+    margin-left: 10px;
+}
+
+#navbarNav {
+    margin-right: 10px
+}
+
 /* Customize the navbar brand and links */
 .navbar-brand,
 .nav-link {
