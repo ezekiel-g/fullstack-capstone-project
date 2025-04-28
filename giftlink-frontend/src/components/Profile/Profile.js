@@ -92,7 +92,7 @@ const Profile = () => {
                 sessionStorage.setItem('name', updatedDetails.name)
                 setUserDetails(updatedDetails)
                 setEditMode(false)
-                setChanged('Name changed successfully!')
+                setChanged('First name changed successfully')
                 setTimeout(() => {
                     setChanged('')
                     navigate('/')
