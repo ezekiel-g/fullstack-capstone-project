@@ -34,7 +34,7 @@ function DetailsPage() {
 
         fetchGift()
         window.scrollTo(0, 0)
-    }, [productId])
+    }, [productId, navigate])
 
     const handleBackClick = () => { navigate(-1) }
 
